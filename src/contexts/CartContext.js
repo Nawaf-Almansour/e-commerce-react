@@ -1,7 +1,7 @@
 import React, { useState, createContext } from 'react';
 
 export const CartContext = createContext();
-const STORAGE_ITEM = 'dokan_cart';
+const STORAGE_ITEM = 'cart';
 
 export const CartProvider = ({ children }) => {
     const initialItems = JSON.parse(localStorage.getItem(STORAGE_ITEM)) || [];
@@ -10,7 +10,7 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem(STORAGE_ITEM, JSON.stringify(items));
         const itemsCount = items.reduce((prev, curr) => prev + curr.qty, 0);
         const cartTotal = items.reduce(
-            (prev, curr) => prev + curr.qty * curr.price,
+            (prev, curr) => prev + curr.qty * curr.attributes.price,
             0
         );
 
