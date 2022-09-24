@@ -1,45 +1,60 @@
-import React from 'react';
-import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, makeStyles} from "@material-ui/core";
+import React, {useContext} from 'react';
+import {
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    CardHeader,
+    CardMedia,
+    makeStyles
+} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+ import {appConfig} from '../services/config';
+import { CartContext } from "../contexts/CartContext";
 
 const useStyles = makeStyles({
     root: {
         maxWidth: 345,
     },
     media: {
-        height: 140,
+        height: 0,
+        paddingTop: '56.25%',
     },
 });
 
-const ProductCard = () => {
+const ProductCard = (props) => {
+    const {product} = props;
+    const {addToCart} = useContext(CartContext);
     const classes = useStyles();
-    return (
-        <Card className={classes.root}>
-            <CardActionArea>
+
+    if (!product) {
+        return <p>loading...</p>;
+    } else {
+        return (
+            <Card className={classes.root}>
+                <CardHeader title={product.name} subheader={`$${product.price}`}/>
                 <CardMedia
                     className={classes.media}
-                    image="/static/images/cards/contemplative-reptile.jpg"
-                    title="Contemplative Reptile"
+                    image={`${appConfig.URL}${product?.photo.data.attributes.url}`}
+                    title={product.name}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
+                    <Typography variant='body2' color='textSecondary' component='p'>
+                        {product.description}
                     </Typography>
                 </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary">
-                    Share
-                </Button>
-                <Button size="small" color="primary">
-                    Learn More
-                </Button>
-            </CardActions>
-        </Card>
-    );
+                <CardActions disableSpacing>
+                    <Button
+                        color='primary'
+                        variant='contained'
+                        fullWidth
+
+                    >
+                        Add To Cart
+                    </Button>
+                </CardActions>
+            </Card>
+        );
+    }
 }
 export default ProductCard;
