@@ -32,15 +32,15 @@ const ProductCard = (props) => {
     } else {
         return (
             <Card className={classes.root}>
-                <CardHeader title={product.name} subheader={`$${product.price}`}/>
+                <CardHeader title={product.attributes.name} subheader={`$${product.attributes.price}`}/>
                 <CardMedia
                     className={classes.media}
-                    image={`${appConfig.URL}${product?.photo.data.attributes.url}`}
-                    title={product.name}
+                    image={`${appConfig.URL}${product?.attributes.photo.data.attributes.url}`}
+                    title={product.attributes.name}
                 />
                 <CardContent>
                     <Typography variant='body2' color='textSecondary' component='p'>
-                        {product.description}
+                        {product.attributes.description}
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
@@ -48,7 +48,7 @@ const ProductCard = (props) => {
                         color='primary'
                         variant='contained'
                         fullWidth
-
+                        onClick={() => addToCart(product)}
                     >
                         Add To Cart
                     </Button>
