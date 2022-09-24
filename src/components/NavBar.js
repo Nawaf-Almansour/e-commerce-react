@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import Badge from '@material-ui/core/Badge';
 import { CartContext } from "../contexts/CartContext";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,7 +15,12 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
     },
     title: {
-        flexGrow: 1,
+        flex: 1,
+        marginLeft: 10,
+    },
+    link: {
+        color: '#fff',
+        textDecoration: 'none',
     },
 }));
 const NavBar = () => {
@@ -28,11 +34,15 @@ const NavBar = () => {
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
+                        <Link to='/' className={classes.link}>
                         sowge
+                        </Link>
                     </Typography>
+                    <Link to='/cart' className={classes.link}>
                     <Badge overlap="rectangular" color='secondary' badgeContent={cart.itemsCount}>
                         <ShoppingBasketIcon/>
                     </Badge>
+                    </Link>
                 </Toolbar>
             </AppBar>
         </div>
