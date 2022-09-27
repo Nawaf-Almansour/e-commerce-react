@@ -28,7 +28,7 @@ const Home = () => {
     } else {
         return (
             <Grid container spacing={2}>
-                {products.map((product, index) => (
+                {products.map(product => (
                     <Grid key={product.id} xs={12} md={4} item>
                         <ProductCard product={product} />
                     </Grid>
