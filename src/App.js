@@ -7,6 +7,8 @@ import CssBaseLine from "@material-ui/core/CssBaseline";
 import {Container, makeStyles} from "@material-ui/core";
 import {CartProvider} from "./contexts/CartContext";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Order from "./pages/Order";
 
 const useStyles = makeStyles({
     root: {
@@ -29,6 +31,12 @@ const App = () => {
                         </Route>
                         <Route path='/cart'>
                             <Cart/>
+                        </Route>
+                        <Route path='/checkout'>
+                            <Checkout />
+                        </Route>
+                        <Route path='/orders/:code'>
+                            <Order />
                         </Route>
                     </Switch>
                 </Container>
